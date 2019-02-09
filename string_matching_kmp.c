@@ -1,46 +1,5 @@
 #include "string_matching.h"
 
-// int string_matching_kmp(char *text, int N, char* pattern, int M){
-// 	int count = 0;
-// 	int *overlap_list = overlap_array(pattern, M);
-// 	printf("overlap function: ");
-// 	print_array(overlap_list,M);
-//
-// 	//TODO - implement kmp search
-// 	int i = 0;
-// 	int j = 0;
-// 	int score = 0;
-// 	int add = 0;
-//
-// 	while(i < N-M+1){
-// 		while(j < M){
-// 			score = score + add;
-// 			if(text[i+j] == pattern[j]){
-// 				score++;
-// 			}else{
-// 			  if(score == 0){
-// 					i++;
-// 				}
-// 				break;
-// 			}
-// 			j++;
-// 		}
-//
-// 			if(score == M){
-// 				count++;
-// 			}
-//
-// 		if(score != 0){
-// 			add = 0;
-// 			i = i + score - overlap_list[score-1];
-// 			j = overlap_list[score-1];
-// 			add = overlap_list[score-1];
-// 			score = 0;
-// 		}
-// 	}
-// 	free(overlap_list);
-// 	return count;
-// }
 
 int string_matching_kmp(char *text, int N, char* pattern, int M){
 	int count = 0;
