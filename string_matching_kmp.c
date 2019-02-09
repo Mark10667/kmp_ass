@@ -1,17 +1,77 @@
 #include "string_matching.h"
 
+// int string_matching_kmp(char *text, int N, char* pattern, int M){
+// 	int count = 0;
+// 	int *overlap_list = overlap_array(pattern, M);
+// 	printf("overlap function: ");
+// 	print_array(overlap_list,M);
+//
+// 	//TODO - implement kmp search
+// 	int i = 0;
+// 	int j = 0;
+// 	int score = 0;
+// 	int add = 0;
+//
+// 	while(i < N-M+1){
+// 		while(j < M){
+// 			score = score + add;
+// 			if(text[i+j] == pattern[j]){
+// 				score++;
+// 			}else{
+// 			  if(score == 0){
+// 					i++;
+// 				}
+// 				break;
+// 			}
+// 			j++;
+// 		}
+//
+// 			if(score == M){
+// 				count++;
+// 			}
+//
+// 		if(score != 0){
+// 			add = 0;
+// 			i = i + score - overlap_list[score-1];
+// 			j = overlap_list[score-1];
+// 			add = overlap_list[score-1];
+// 			score = 0;
+// 		}
+// 	}
+// 	free(overlap_list);
+// 	return count;
+// }
+
 int string_matching_kmp(char *text, int N, char* pattern, int M){
 	int count = 0;
 	int *overlap_list = overlap_array(pattern, M);
-	printf("overlap function: ");
-	print_array(overlap_list,M);
-	
 	//TODO - implement kmp search
+	int i = 0;
+	int j = 0;
+	while(i < N-M+1){
+		while(j < M){
+			if(text[i] == pattern[j]){
+				i++;
+				j++;
+			}else{
+			  if(j == 0){
+					i++;
+				}
+				break;
+			}
+		}
+
+			if(j == M){
+				count++;
+			}
+
+		if(j != 0){
+			j = overlap_list[j-1];
+		}
+	}
 	free(overlap_list);
 	return count;
 }
-
-
  /*
     General computation of an overlap function in linear time:
     overlap function of position i is a length
@@ -21,7 +81,7 @@ int string_matching_kmp(char *text, int N, char* pattern, int M){
     return: an array with the values of an overlap function for each pattern position
  */
 int * overlap_array(char* pattern, int M){
-	int *ol_list = calloc(M, sizeof(int));    
+	int *ol_list = calloc(M, sizeof(int));
 
     int pos = 1;  // first is always zero
     while (pos < M){

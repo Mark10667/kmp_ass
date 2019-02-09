@@ -10,5 +10,6 @@ int string_matching_kmp(char *text, int N, char* pattern, int M);
 
 int * overlap_array(char* pattern, int M);
 void print_array(int *arr, int size);
+int performance_test();
 
 #endif

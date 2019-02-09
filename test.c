@@ -20,28 +20,28 @@ void short_test (char *text, int N, char * pattern, int M){
 void stress_test(int N, int M){
   static char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   srand(time(NULL));   // Initialization, should only be called once.
-  
+
   while (1) {
     int n = rand() % (N-3) + 3;      // Returns a pseudo-random integer between 3 and N.
-	int m = rand() % M + 1; 
-    
+	int m = rand() % M + 1;
+
 	char *text = malloc(n);
     for (int i=0; i<n; i++){
 	  int pos = rand() % (int)(sizeof(charset) -1);
-      text[i] = charset[pos];      
+      text[i] = charset[pos];
     }
-	
+
 	char *pattern = malloc(m);
     for (int i=0; i<m; i++){
 	  int pos = rand() % (int)(sizeof(charset) -1);
-      pattern[i] = charset[pos];      
+      pattern[i] = charset[pos];
     }
-    
+
     printf("text='%s', pattern='%s'\n", text, pattern);
-	
+
     int result1 = string_matching_naive(text, n, pattern, m);
     int result2 = string_matching_kmp(text, n, pattern, m);
-    
+
     if (result1==result2)
       printf("OK\n");
     else {
@@ -50,17 +50,18 @@ void stress_test(int N, int M){
 	}
 	free(text);
 	free(pattern);
-  }  
+  }
 }
 
+
 int main(int argc, char **argv ){
-  if (argc < 4){
-    printf("To run: test <1> <text> <N> <pattern> <M>\n or test <2> <N> <M>\n");
+  if (argc != 2 && argc != 4 && argc != 6){
+    printf("To run: test <1> <text> <N> <pattern> <M>\n or test <2> <N> <M>\n or test <3>(see the timing of 2 algorithm)\n");
     return 0;
    }
-   
+
    int mode = atoi(argv[1]);
-   
+
    if (mode == 1){
 	   if (argc < 6){
 			printf("To run: test <1> <text> <N> <pattern> <M>\n");
@@ -74,12 +75,25 @@ int main(int argc, char **argv ){
 	   short_test(text, N, pattern, M);
 	   return 0;
    }
-   
-   int N = atoi(argv[2]);
-   int M = atoi(argv[3]);
-   
-   stress_test(N, M);
-   
+
+   if(mode == 2){
+     if (argc < 4){
+      printf("To run: test <2> <N> <M>\n");
+      return 0;
+     }
+     int N = atoi(argv[2]);
+     int M = atoi(argv[3]);
+
+     stress_test(N, M);
+     return 0;
+    }
+
+    if (mode == 3){
+      puts("enter mode 3");
+      performance_test();
+      return 0;
+    }
+
    return 0;
-  
+
 }
