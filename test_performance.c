@@ -9,7 +9,8 @@ int performance_test(){
 
   int N = 0;
   int M = 400;
-  int i = 0;
+  int j = 0;
+  int i;
   int average_time = 100;
   clock_t start_n, end_n, start_k, end_k;
   double cpu_time_used_totaln= 0;
@@ -23,19 +24,19 @@ int performance_test(){
   // char *pattern = malloc(m);
 
   for(N = 10000; N <= 1000000; N = N + 50000){
-    while (i < average_time) {
+    while (j < average_time) {
       // int n = rand() % (N-3) + 3;      // Returns a pseudo-random integer between 3 and N.
       // int m = rand() % M + 1;
 
       text = malloc(N);
-      for (int i=0; i<N; i++){
+      for (i=0; i<N; i++){
       int pos = rand() % (int)(sizeof(charset) -1);
         text[i] = charset[pos];
       }
       text[i] = '\0';
 
       pattern = malloc(M);
-      for (int i=0; i<M; i++){
+      for (i=0; i<M; i++){
       int pos = rand() % (int)(sizeof(charset) -1);
         pattern[i] = charset[pos];
       }
@@ -53,7 +54,7 @@ int performance_test(){
       cpu_time_used_totalk = cpu_time_used_totalk + (double)(end_k - start_k)/CLOCKS_PER_SEC ;
 
 
-      i++;
+      j++;
     }
 
     cpu_time_used_n = (double) cpu_time_used_totaln / average_time;
@@ -62,7 +63,7 @@ int performance_test(){
     printf("N = %d, naive takes %f,  kmp takes %f, k / n is %f\n", N, cpu_time_used_n, cpu_time_used_k, k_n_ratio);
     cpu_time_used_totaln= 0;
     cpu_time_used_totalk= 0;
-    i = 0;
+    j = 0;
   }
   free(text);
   free(pattern);
