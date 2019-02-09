@@ -32,12 +32,14 @@ int performance_test(){
       int pos = rand() % (int)(sizeof(charset) -1);
         text[i] = charset[pos];
       }
+      text[i] = '\0';
 
       pattern = malloc(M);
       for (int i=0; i<M; i++){
       int pos = rand() % (int)(sizeof(charset) -1);
         pattern[i] = charset[pos];
       }
+      pattern[i] = '\0';
 
       //printf("text='%s', pattern='%s'\n", text, pattern);
       start_n = clock();

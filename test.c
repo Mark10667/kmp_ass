@@ -30,12 +30,14 @@ void stress_test(int N, int M){
 	  int pos = rand() % (int)(sizeof(charset) -1);
       text[i] = charset[pos];
     }
+    text[i] = '\0';
 
 	char *pattern = malloc(m);
     for (int i=0; i<m; i++){
 	  int pos = rand() % (int)(sizeof(charset) -1);
       pattern[i] = charset[pos];
     }
+    pattern[i] = '\0';
 
     printf("text='%s', pattern='%s'\n", text, pattern);
 
