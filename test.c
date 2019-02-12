@@ -40,7 +40,7 @@ void stress_test(int N, int M){
     }
     pattern[i] = '\0';
 
-    printf("text='%s', pattern='%s'\n", text, pattern);
+    //printf("text='%s', pattern='%s'\n", text, pattern);
 
     int result1 = string_matching_naive(text, n, pattern, m);
     int result2 = string_matching_kmp(text, n, pattern, m);
