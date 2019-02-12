@@ -28,14 +28,14 @@ int performance_test(){
       // int n = rand() % (N-3) + 3;      // Returns a pseudo-random integer between 3 and N.
       // int m = rand() % M + 1;
 
-      text = malloc(N);
+      text = malloc(N+1);
       for (i=0; i<N; i++){
       int pos = rand() % (int)(sizeof(charset) -1);
         text[i] = charset[pos];
       }
       text[i] = '\0';
 
-      pattern = malloc(M);
+      pattern = malloc(M+1);
       for (i=0; i<M; i++){
       int pos = rand() % (int)(sizeof(charset) -1);
         pattern[i] = charset[pos];
@@ -64,6 +64,7 @@ int performance_test(){
     cpu_time_used_totaln= 0;
     cpu_time_used_totalk= 0;
     j = 0;
+
   }
   free(text);
   free(pattern);
